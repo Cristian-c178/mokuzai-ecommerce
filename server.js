@@ -1,10 +1,11 @@
 // server.js
 const express = require('express');
-const app = express();
-const port = 3000;
 const cors = require('cors'); // Importar cors
-app.use(cors()); // Habilitar CORS para todas las solicitudes
 
+const app = express();
+const PORT = process.env.PORT || 3000; // Usar process.env.PORT para despliegue
+
+app.use(cors()); // Habilitar CORS para todas las solicitudes
 
 // Middleware para manejar JSON
 app.use(express.json());
@@ -14,11 +15,7 @@ app.get('/', (req, res) => {
     res.send('¡Bienvenido a Mokuzai E-commerce!');
 });
 
-// Inicia el servidor
-app.listen(port, () => {
-    console.log(`Servidor corriendo en http://localhost:${port}`);
-});
-
+// Endpoint para los productos
 app.get('/api/products', (req, res) => {
     const products = [
         { id: 1, name: 'Mesa de madera', price: 120, description: 'Una mesa artesanal de alta calidad.' },
@@ -28,4 +25,7 @@ app.get('/api/products', (req, res) => {
     res.json(products);
 });
 
-
+// Inicia el servidor
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
