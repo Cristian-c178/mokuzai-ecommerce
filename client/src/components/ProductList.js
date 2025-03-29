@@ -7,7 +7,7 @@ const ProductList = ({ addToCart }) => {
     const [searchTerm, setSearchTerm] = useState(''); // Estado para el término de búsqueda
 
     useEffect(() => {
-        axios.get('http://localhost:3000/api/products')
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products`)
             .then(response => setProducts(response.data))
             .catch(error => console.error('Error al cargar productos:', error));
     }, []);
