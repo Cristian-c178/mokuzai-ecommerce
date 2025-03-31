@@ -1,14 +1,183 @@
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Asegura que el layout ocupe toda la altura */
+html, body {
+  font-family: 'Roboto', sans-serif; /* Fuente base */
+  color: #333; /* Color de texto oscuro */
+  line-height: 1.6; /* Espaciado cómodo */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif; /* Fuente de encabezados */
+  font-weight: 600; /* Resalta los encabezados */
+}
+
+p {
+  font-size: 16px; /* Tamaño base del texto */
+  color: white; /* Color neutro */
+}
+
+button {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Asegura que ocupe toda la ventana */
+}
+
+main {
+  flex: 1; /* El contenido principal ocupa el espacio disponible */
+}
+
+.footer {
+  margin-top: auto; /* Asegura que el footer esté al final */
+}
+
+/* Botón flotante */
+.whatsapp-button {
+  position: fixed;
+  bottom: 20px; /* Distancia desde el fondo al inicio */
+  right: 20px; /* Distancia desde el lado derecho */
+  background-color: #25D366;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.whatsapp-button span {
+  color: white;
+  font-size: 2rem;
+}
+
+/* Chat flotante refinado */
+/* Animación del chat al abrir */
+.chat-box {
+  position: fixed;
+  bottom: 100px; /* Justo encima del botón flotante */
+  right: 20px;
+  background-color: #fdfdfd;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  width: 250px;
+  padding: 15px;
+  z-index: 1000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  opacity: 0; /* Inicia invisible */
+  transform: scale(0.9); /* Inicia ligeramente reducido */
+  animation: openChat 0.4s ease forwards; /* Aplica animación */
+}
+
+/* Definición de la animación */
+@keyframes openChat {
+  0% {
+      opacity: 0;
+      transform: scale(0.9); /* Comienza reducido */
+  }
+  100% {
+      opacity: 1;
+      transform: scale(1); /* Termina en tamaño original */
+  }
+}
+
+
+/* Opciones flotantes refinadas */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Espaciado entre los botones */
+  margin-bottom: 15px; /* Separación del área de texto */
+}
+
+.options-container button {
+  background-color: #f7f7f7; /* Fondo gris claro */
+  color: #333; /* Texto oscuro */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Borde suave */
+  border-radius: 8px; /* Esquinas más redondeadas */
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Suavidad en las transiciones */
+}
+
+.options-container button:hover {
+  background-color: #eaeaea; /* Gris claro más pronunciado */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+  transform: translateY(-2px); /* Sutil efecto de elevación */
+}
+
+/* Área de texto refinada */
+.chat-box textarea {
+  width: 100%;
+  height: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Borde más ligero */
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333; /* Texto oscuro */
+  background-color: #f9f9f9; /* Fondo suave */
+  resize: none; /* Evita redimensionar */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra interna */
+  margin-bottom: 15px; /* Separación del botón de enviar */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+
+.chat-box textarea:focus {
+  border-color:rgb(255, 255, 255); /* Verde WhatsApp al enfocar */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); /* Sombra verde sutil */
+  outline: none; /* Sin bordes adicionales */
+}
+
+/* Botón de enviar (sin cambios) */
+.chat-box button {
+  width: 100%;
+  background-color: #25D366;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.chat-box button:hover {
+  background-color: #1da851;
+}
+
+
+
+
+
+/* Asegura compatibilidad con el footer */
+footer {
+  position: relative;
+  z-index: 1; /* Mantiene el footer encima del botón si es necesario */
+}
+
+.whatsapp-button {
+  z-index: 1000; /* Asegura que el botón esté por encima de otros elementos */
+}
+
+.welcome-message {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555; /* Color neutro */
+  margin-bottom: 10px; /* Separación del resto del contenido */
+  text-align: center;
 }

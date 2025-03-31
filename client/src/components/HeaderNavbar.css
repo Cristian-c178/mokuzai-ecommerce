@@ -1,0 +1,165 @@
+/* Header */
+.header {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    padding: 10px 20px;
+    background-color: transparent; /* Sin fondo */
+    color: #16354D; /* Azul oscuro para el texto */
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Espaciado entre elementos */
+    align-items: center;
+    width: 100%; /* Para ocupar todo el ancho disponible */
+    max-width: 1200px; /* Tamaño máximo del contenedor */
+}
+
+.header-title {
+    flex: 1; /* Ocupa espacio para centrarse */
+    text-align: center; /* Asegurar que el texto está centrado */
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.cart-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #16354D; /* Azul oscuro inicial */
+    font-size: 1rem; /* Tamaño inicial */
+    padding: 10px;
+    transition: transform 0.3s ease, color 0.3s ease; /* Suaviza la transición */
+    will-change: transform, color; /* Optimiza la transición */
+}
+
+.cart-link:hover {
+    transform: scale(1.1); /* Expande el carrito al pasar el mouse */
+    color: #6B99C3; /* Cambia al azul claro en hover */
+}
+
+
+.material-icons {
+    font-size: 1.8rem;
+    margin-right: 5px;
+}
+
+.cart-count {
+    background-color: #6B99C3; /* Azul claro */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 0.9rem;
+    margin-left: -10px;
+}
+
+
+/* Ajustar el tamaño del carrusel */
+.carousel-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    margin-top: 20px; /* Separación con el navbar */
+    margin-bottom: 20px; /* Separación opcional debajo */
+}
+
+.carousel {
+    width: 70%; /* Mantiene el ancho en el 70% */
+    height: auto; /* Ajusta la altura automáticamente */
+    overflow: hidden; /* Evita desbordamiento */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.carousel img {
+    height: 500px; /* Ajuste a una altura más razonable */
+    object-fit: cover; /* Recorta la imagen proporcionalmente */
+    width: 100%; /* Mantiene el ancho completo */
+}
+
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    
+}
+
+.nav-link {
+    color: #ffffff; /* Texto blanco */
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease; /* Transición suave */
+}
+
+.nav-link:hover {
+    color: #6B99C3; /* Azul claro al pasar el mouse */
+}
+
+/* Menú desplegable refinado */
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* Justo debajo del enlace */
+    left: 0;
+    background-color: #ffffff; /* Fondo blanco */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Borde suave */
+    border-radius: 8px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Espaciado entre las categorías */
+    z-index: 1000;
+    width: 50px; /* Ancho fijo más reducido */
+    max-width: 50px; /* Asegura que no se extienda más */
+}
+
+/* Estilo de los ítems en el menú */
+.dropdown-item {
+    padding: 10px 15px; /* Espaciado interno reducido */
+    font-size: 14px; /* Tamaño del texto */
+    color: #555; /* Texto oscuro */
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
+}
+
+.dropdown-item:hover {
+    background-color: #f7f7f7; /* Fondo gris claro al pasar el mouse */
+    color: #16354D; /* Azul oscuro */
+}
+
+
+
+.navbar-nav .nav-link {
+    font-size: 1.1rem; /* Tamaño del texto */
+    text-transform: uppercase;
+    text-decoration: none; /* Sin subrayado */
+    color: #16354D; /* Azul oscuro inicial */
+    padding: 10px 15px; /* Espaciado interno */
+    position: relative; /* Necesario para la animación de la línea */
+    transition: transform 0.3s ease, color 0.3s ease; /* Transición suave */
+    will-change: transform, color; /* Optimiza la transición */
+}
+
+.navbar-nav .nav-link:hover {
+    transform: scale(1.1); /* Expande el texto al pasar el mouse */
+    color: #6B99C3; /* Cambia al azul claro en hover */
+}
+
+/* Animación de la línea que aparece debajo del enlace */
+.navbar-nav .nav-link::after {
+    content: ''; /* Línea decorativa */
+    position: absolute;
+    bottom: 0; /* Colocada justo debajo del enlace */
+    left: 0; /* Comienza desde la izquierda */
+    width: 0; /* Inicialmente oculta */
+    height: 2px; /* Altura de la línea */
+    background-color: #6B99C3; /* Color de la línea en hover */
+    transition: width 0.3s ease; /* Animación gradual */
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 100%; /* Expande la línea completamente */
+}
+
+
+
