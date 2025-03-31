@@ -4,12 +4,24 @@ import './ProductList.css';
 
 const ProductList = ({ addToCart }) => {
     const [products, setProducts] = useState([]); // Lista completa de productos
-    const [searchTerm, setSearchTerm] = useState(''); // Estado para el término de búsqueda
+    const [searchTerm, setSearchTerm] = useState(''); // Término de búsqueda
+    const [currentPage, setCurrentPage] = useState(1); // Página actual
+    const [loading, setLoading] = useState(true); // Estado de carga
+    const itemsPerPage = 6; // Cantidad de productos por página
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products`)
-            .then(response => setProducts(response.data))
-            .catch(error => console.error('Error al cargar productos:', error));
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products`);
+                setProducts(response.data);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error al cargar productos:', error);
+                setLoading(false);
+            }
+        };
+
+        fetchProducts();
     }, []);
 
     // Función para eliminar acentos y caracteres especiales
@@ -22,6 +34,20 @@ const ProductList = ({ addToCart }) => {
         removeAccents(product.name.toLowerCase()).includes(removeAccents(searchTerm.toLowerCase())) ||
         removeAccents(product.description.toLowerCase()).includes(removeAccents(searchTerm.toLowerCase()))
     );
+
+    // Calcular productos de la página actual
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentProducts = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Cambiar de página
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    // Generar los números de las páginas
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+    const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
     return (
         <div className="container">
@@ -38,30 +64,52 @@ const ProductList = ({ addToCart }) => {
                 />
             </div>
 
-            <div className="row">
-                {filteredProducts.map(product => (
-                    <div key={product.id} className="col-md-4 mb-4">
-                        <div className="card shadow-sm">
-                            <img
-                                src={product.image}
-                                className="card-img-top"
-                                alt={product.name}
-                            />
-                            <div className="card-body text-center">
-                                <h5 className="card-title text-primary">{product.name}</h5>
-                                <p className="card-text">{product.description}</p>
-                                <p className="fw-bold">${product.price}</p>
-                                <button
-                                    className="btn btn-success"
-                                    onClick={() => addToCart(product)}
-                                >
-                                    Agregar al carrito
-                                </button>
+            {/* Mensajes de carga y error */}
+            {loading ? (
+                <p className="text-center">Cargando productos...</p>
+            ) : filteredProducts.length === 0 ? (
+                <p className="text-center">No se encontraron productos.</p>
+            ) : (
+                <div className="row">
+                    {currentProducts.map(product => (
+                        <div key={product._id} className="col-md-4 mb-4">
+                            <div className="card shadow-sm">
+                                <img
+                                    src={product.image || '/images/placeholder.jpg'} // Imagen o marcador de posición
+                                    className="card-img-top"
+                                    alt={product.name || 'Imagen no disponible'}
+                                />
+                                <div className="card-body text-center">
+                                    <h5 className="card-title text-primary">{product.name}</h5>
+                                    <p className="card-text">{product.description}</p>
+                                    <p className="fw-bold">${product.price}</p>
+                                    <button
+                                        className="btn btn-success"
+                                        onClick={() => addToCart(product)}
+                                    >
+                                        Agregar al carrito
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            )}
+
+            {/* Paginación */}
+            {filteredProducts.length > itemsPerPage && (
+                <nav>
+                    <ul className="pagination justify-content-center">
+                        {pageNumbers.map((number) => (
+                            <li key={number} className={`page-item ${number === currentPage ? 'active' : ''}`}>
+                                <button className="page-link" onClick={() => handlePageChange(number)}>
+                                    {number}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            )}
         </div>
     );
 };

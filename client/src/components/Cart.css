@@ -1,0 +1,114 @@
+.cart-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff; /* Fondo blanco profesional */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+    border-radius: 10px; /* Bordes redondeados */
+    font-family: 'Arial', sans-serif; /* Tipografía limpia */
+}
+
+.cart-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.cart-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: #007BFF; /* Azul moderno */
+    margin: 10px auto;
+}
+
+.cart-empty {
+    font-size: 18px;
+    text-align: center;
+    color: #6c757d; /* Gris refinado */
+    margin: 20px 0;
+}
+
+.cart-list {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0; /* Separador ligero */
+}
+
+.cart-item-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+.cart-item-details {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.cart-item-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.cart-item-price {
+    font-size: 14px;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+.cart-item-remove {
+    background-color: #dc3545; /* Rojo moderno */
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cart-item-remove:hover {
+    background-color: #c82333; /* Rojo más oscuro */
+}
+
+.cart-summary {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.cart-summary h3 {
+    font-size: 20px;
+    color: #333;
+}
+
+.cart-checkout-button {
+    background-color: #28a745; /* Verde moderno */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cart-checkout-button:hover {
+    background-color: #218838; /* Verde más oscuro */
+}

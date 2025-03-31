@@ -34,16 +34,17 @@ const Navbar = () => {
                             </span>
                             {dropdownOpen && (
                                 <ul className="dropdown-menu">
-                                    <li>
-                                        <Link className="dropdown-item" to="/products/electronica">Letreros Led</Link>
-                                    </li>
-                                    <li>
-                                        <Link className="dropdown-item" to="/products/moda">Decorativos MDF </Link>
-                                    </li>
-                                    <li>
-                                        <Link className="dropdown-item" to="/products/hogar">Detalles Sublimados</Link>
-                                    </li>
-                                </ul>
+                                <li>
+                                    <Link className="dropdown-item" to="/products/letreros-led">Letreros Led</Link>
+                                </li>
+                                <li>
+                                    <Link className="dropdown-item" to="/products/decorativos-mdf">Decorativos MDF</Link>
+                                </li>
+                                <li>
+                                    <Link className="dropdown-item" to="/products/detalles-sublimados">Detalles Sublimados</Link>
+                                </li>
+                            </ul>
+                            
                             )}
                         </li>
                         <li className="nav-item">

@@ -1,18 +1,114 @@
 .card {
-    border-radius: 15px;
+    border: none;
+    border-radius: 12px; /* Bordes más estilizados */
     overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Sombra más moderna */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animaciones elegantes */
+}
+
+.card:hover {
+    transform: scale(1.06); /* Ajuste suave al pasar el mouse */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25); /* Sombra más destacada */
 }
 
 .card-img-top {
-    height: 200px;
-    object-fit: cover;
+    height: 180px; /* Altura consistente */
+    object-fit: cover; /* Ajusta proporción de imagen */
+    border-bottom: 4px solid #e5e5e5; /* Línea decorativa */
 }
 
 .card-title {
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-size: 20px; /* Tamaño estilizado */
+    font-weight: bold; /* Refuerza el texto */
+    color: #007BFF; /* Azul refinado */
+    text-transform: capitalize; /* Formato de texto */
+    margin-bottom: 8px;
 }
 
-.btn-outline-primary {
-    border-radius: 20px;
+.card-text {
+    font-size: 14px;
+    color: #6c757d; /* Gris estilizado */
+    margin-bottom: 12px;
 }
+
+.fw-bold {
+    font-size: 16px; /* Negrita clásica */
+    color: #343a40; /* Gris oscuro */
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px; /* Bordes refinados */
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #218838; /* Color más intenso */
+}
+
+.container {
+    padding: 30px; /* Ajuste moderno */
+}
+
+.text-center {
+    text-align: center;
+}
+
+h2 {
+    font-size: 28px; /* Ajuste refinado */
+    font-weight: bold;
+    color: #343a40; /* Gris oscuro */
+    margin-bottom: 25px; /* Espaciado adecuado */
+    text-transform: uppercase; /* Todo en mayúsculas */
+    text-align: center;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    display: block;
+    width: 100px; /* Subrayado decorativo */
+    height: 4px;
+    background-color: #007BFF; /* Azul moderno */
+    margin: 10px auto; /* Centrado */
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espaciado entre tarjetas */
+    justify-content: center; /* Centrado horizontal */
+    margin-top: 50px; /* Espacio adicional entre la barra y las tarjetas */
+}
+
+
+.page-item.active .page-link {
+    background-color: #25D366; /* Verde moderno */
+    border-color: #25D366;
+    color: white;
+}
+
+.page-link {
+    color: #25D366;
+    cursor: pointer;
+    border-radius: 5px; /* Bordes refinados */
+    padding: 5px 10px;
+}
+
+.page-link:hover {
+    background-color: #1da851; /* Verde más oscuro */
+    color: white;
+}
+
+.form-control {
+    max-width: 400px;
+    margin: auto;
+    display: block;
+    border-radius: 50px; /* Bordes redondeados */
+    padding: 10px 20px;
+    border: 2px solid #dcdcdc;
+    background-color: #f1f3f4; /* Fondo claro */
+}
+
+

@@ -1,37 +1,46 @@
 import React from 'react';
+import './Cart.css'; // Importa los estilos refinados
 
-function Cart({ cart, removeFromCart }) {
-    // Función para calcular el total dinámico
+const Cart = ({ cart, currency, exchangeRate, removeFromCart }) => {
+    // Calcular el total del precio de los productos
     const calculateTotal = () => {
-        const total = cart.reduce((sum, item) => sum + (item.price || 0), 0); // Usa directamente el precio
-        return total.toFixed(2); // Asegura que el total se muestre con dos decimales
+        const total = cart.reduce((sum, product) => sum + product.price, 0);
+        return currency === 'USD'
+            ? `$${(total / exchangeRate).toFixed(2)}`
+            : `S/${total.toFixed(2)}`;
     };
 
-    // Función para finalizar la compra
+    // Redirigir a Mercado Pago
     const handleCheckout = () => {
-        alert('¡Gracias por tu compra! Tu pedido ha sido procesado.');
-        // Aquí podrías agregar lógica adicional, como limpiar el carrito o redirigir al usuario
+        const mercadoPagoURL = "https://link.mercadopago.com.pe/mokuzai"; // Tu link de Mercado Pago
+        window.open(mercadoPagoURL, "_blank");
     };
 
     return (
-        <div className="container text-center my-4">
-            <h2>Carrito de Compras</h2>
+        <div className="cart-container">
+            <h2 className="cart-title">Carrito de Compras</h2>
             {cart.length === 0 ? (
-                <p>Tu carrito está vacío.</p>
+                <p className="cart-empty">Tu carrito está vacío. ¡Agrega productos para continuar!</p>
             ) : (
                 <div>
-                    <ul className="list-group">
-                        {cart.map((item, index) => (
-                            <li
-                                key={index}
-                                className="list-group-item d-flex justify-content-between align-items-center"
-                            >
-                                {item.name}
-                                <span className="badge bg-primary rounded-pill">
-                                    ${item.price.toFixed(2)} {/* Usa directamente toFixed sin conversión adicional */}
-                                </span>
+                    <ul className="cart-list">
+                        {cart.map((product, index) => (
+                            <li key={index} className="cart-item">
+                                <img
+                                    src={product.image || '/images/placeholder.jpg'} // Imagen del producto
+                                    alt={product.name || 'Sin imagen'}
+                                    className="cart-item-image"
+                                />
+                                <div className="cart-item-details">
+                                    <h5 className="cart-item-name">{product.name}</h5>
+                                    <p className="cart-item-price">
+                                        Precio: {currency === 'USD'
+                                            ? `$${(product.price / exchangeRate).toFixed(2)}`
+                                            : `S/${product.price.toFixed(2)}`}
+                                    </p>
+                                </div>
                                 <button
-                                    className="btn btn-danger btn-sm"
+                                    className="cart-item-remove"
                                     onClick={() => removeFromCart(index)}
                                 >
                                     Eliminar
@@ -39,12 +48,9 @@ function Cart({ cart, removeFromCart }) {
                             </li>
                         ))}
                     </ul>
-                    <div className="text-end mt-3">
-                        <h5>Total: ${calculateTotal()}</h5>
-                        <button
-                            className="btn btn-primary mt-2"
-                            onClick={handleCheckout}
-                        >
+                    <div className="cart-summary">
+                        <h3>Total: {calculateTotal()}</h3>
+                        <button className="cart-checkout-button" onClick={handleCheckout}>
                             Finalizar Compra
                         </button>
                     </div>
@@ -52,6 +58,6 @@ function Cart({ cart, removeFromCart }) {
             )}
         </div>
     );
-}
+};
 
 export default Cart;

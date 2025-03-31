@@ -4,6 +4,8 @@
     justify-content: center; /* Centrar horizontalmente */
     align-items: center; /* Centrar verticalmente */
     padding: 10px 20px;
+    padding-top: 30px;
+    padding-left: 14%;
     background-color: transparent; /* Sin fondo */
     color: #16354D; /* Azul oscuro para el texto */
 }
@@ -162,4 +164,38 @@
 }
 
 
+.currency-selector {
+    display: flex;
+    align-items: center; /* Centrar el texto y el selector verticalmente */
+    margin-right: 20px; /* Separación con el carrito */
+    font-size: 1rem; /* Tamaño de texto refinado */
+    color: #16354D; /* Azul oscuro elegante */
+}
+
+.currency-label {
+    margin-right: 8px; /* Espaciado entre el texto y el selector */
+    font-weight: bold; /* Enfatiza el texto del label */
+}
+
+.currency-select {
+    border: 2px solid #6B99C3; /* Borde azul claro */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 6px 12px; /* Espaciado interno del selector */
+    font-size: 1rem; /* Tamaño del texto */
+    color: #16354D; /* Azul oscuro para el texto */
+    background-color: #ffffff; /* Fondo blanco */
+    cursor: pointer; /* Cambia el cursor al hover */
+    transition: all 0.3s ease; /* Animación suave */
+}
+
+.currency-select:hover {
+    border-color: #16354D; /* Cambia el borde a azul más oscuro */
+    background-color: #f7faff; /* Sutil fondo azul claro en hover */
+}
+
+.currency-select:focus {
+    outline: none; /* Elimina el contorno por defecto */
+    border-color: #007BFF; /* Azul moderno al enfocar */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Resplandor refinado */
+}
 

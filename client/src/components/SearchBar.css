@@ -1,0 +1,36 @@
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f1f3f4; /* Fondo similar a Google */
+    border: 1px solid #dcdcdc;
+    border-radius: 50px; /* Bordes redondeados */
+    padding: 10px 20px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.search-icon {
+    color: #5f6368; /* Color de la lupa */
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    font-size: 16px;
+    color: #202124;
+}
+
+.search-input::placeholder {
+    color: #5f6368;
+}
