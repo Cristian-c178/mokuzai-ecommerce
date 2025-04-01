@@ -6,18 +6,27 @@ require('dotenv').config(); // Importar variables de entorno
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Verificar si MONGO_URI está definida correctamente
+if (!process.env.MONGO_URI) {
+    console.error("❌ Error: La variable MONGO_URI no está definida.");
+    process.exit(1); // Detiene el proceso si falta la configuración
+}
+
 // Conexión con MongoDB
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-}).then(() => {
-    console.log('Conectado a MongoDB');
-}).catch((err) => {
-    console.error('Error al conectar a MongoDB:', err.message);
+})
+.then(() => console.log(`✅ Conectado a MongoDB`))
+.catch((err) => {
+    console.error('❌ Error al conectar a MongoDB:', err.message);
 });
 
 // Middleware
-app.use(cors()); // Habilitar CORS
+app.use(cors({
+    origin: ["https://mokuzai.store", "https://www.mokuzai.store", "https://mokuzai-ecommerce.vercel.app"],
+    methods: ["GET", "POST"],
+}));
 app.use(express.json()); // Manejar JSON
 
 // Modelo de producto
@@ -26,7 +35,7 @@ const productSchema = new mongoose.Schema({
     price: { type: Number, required: true },
     description: { type: String, required: true },
     image: { type: String, default: '' },
-    category: { type: String, required: true }, // Nueva propiedad para la categoría
+    category: { type: String, required: true },
 });
 
 const Product = mongoose.model('Product', productSchema);
@@ -36,40 +45,57 @@ app.get('/', (req, res) => {
     res.send('¡Bienvenido a Mokuzai E-commerce!');
 });
 
-// Endpoint para obtener productos desde la base de datos
+// Endpoint para obtener productos desde la base de datos con manejo de errores detallado
 app.get('/api/products', async (req, res) => {
     try {
-        const products = await Product.find(); // Consultar todos los productos
+        const products = await Product.find();
+        if (products.length === 0) {
+            return res.status(404).json({ message: "No se encontraron productos en la base de datos" });
+        }
         res.status(200).json(products);
     } catch (error) {
-        res.status(500).json({ message: 'Error al obtener los productos' });
+        console.error("❌ Error en /api/products:", error.message);
+        res.status(500).json({ message: "Error interno en el servidor", error: error.message });
     }
 });
 
-// Endpoint para obtener productos por categoría
+// Endpoint para obtener productos por categoría con mejor manejo de errores
 app.get('/api/products/:category', async (req, res) => {
     try {
-        const { category } = req.params; // Obtener la categoría desde la URL
-        const products = await Product.find({ category }); // Filtrar por categoría
+        const { category } = req.params;
+        const products = await Product.find({ category });
+
+        if (products.length === 0) {
+            return res.status(404).json({ message: `No se encontraron productos en la categoría '${category}'` });
+        }
+
         res.status(200).json(products);
     } catch (error) {
-        res.status(500).json({ message: 'Error al obtener los productos por categoría' });
+        console.error(`❌ Error en /api/products/${req.params.category}:`, error.message);
+        res.status(500).json({ message: "Error interno en el servidor", error: error.message });
     }
 });
 
-// Endpoint para agregar un producto
+// Endpoint para agregar un producto con validación
 app.post('/api/products', async (req, res) => {
     try {
-        const { name, price, description, image, category } = req.body; // Asegurarse de incluir categoría
+        const { name, price, description, image, category } = req.body;
+        
+        if (!name || !price || !description || !category) {
+            return res.status(400).json({ message: "Todos los campos son obligatorios" });
+        }
+
         const newProduct = new Product({ name, price, description, image, category });
-        await newProduct.save(); // Guardar el producto en la base de datos
+        await newProduct.save();
+
         res.status(201).json(newProduct);
     } catch (error) {
-        res.status(500).json({ message: 'Error al agregar el producto' });
+        console.error("❌ Error en /api/products (POST):", error.message);
+        res.status(500).json({ message: "Error al agregar el producto", error: error.message });
     }
 });
 
 // Inicia el servidor
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`🚀 Servidor corriendo en el puerto ${PORT}`);
 });

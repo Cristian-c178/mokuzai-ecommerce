@@ -4,10 +4,9 @@
     justify-content: center; /* Centrar horizontalmente */
     align-items: center; /* Centrar verticalmente */
     padding: 10px 20px;
-    padding-top: 30px;
-    padding-left: 14%;
     background-color: transparent; /* Sin fondo */
     color: #16354D; /* Azul oscuro para el texto */
+    
 }
 
 .header-container {
