@@ -9,13 +9,33 @@
     
 }
 
+
+.mokuzai-button {
+    position: absolute;
+    left: 50px; /* Pequeño margen desde el borde */
+    top: 15px; /* Ajusta la altura */
+    font-size: 1.8rem; /* Tamaño adecuado */
+    font-weight: bold;
+    color: #16354D; /* Color del texto */
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.mokuzai-button:hover {
+    opacity: 0.7; /* Efecto visual al pasar el mouse */
+}
+
+
 .header-container {
     display: flex;
-    justify-content: space-between; /* Espaciado entre elementos */
+    justify-content: space-between; /* Mantiene los elementos bien distribuidos */
     align-items: center;
-    width: 100%; /* Para ocupar todo el ancho disponible */
-    max-width: 1200px; /* Tamaño máximo del contenedor */
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px; /* Agrega un poco de margen interno */
 }
+
 
 .header-title {
     flex: 1; /* Ocupa espacio para centrarse */
@@ -81,9 +101,32 @@
 }
 
 .navbar {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */ 
     
 }
+
+.sticky-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* Menú desplegable refinado */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block !important; /* Se despliega al pasar el mouse */
+}
+
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between; /* Mantiene los elementos equilibrados */
+    align-items: center;
+}
+
 
 .nav-link {
     color: #ffffff; /* Texto blanco */
@@ -164,12 +207,12 @@
 
 
 .currency-selector {
+    margin-left: auto !important; /* Lo mantiene alineado sin desplazarse */
     display: flex;
-    align-items: center; /* Centrar el texto y el selector verticalmente */
-    margin-right: 20px; /* Separación con el carrito */
-    font-size: 1rem; /* Tamaño de texto refinado */
-    color: #16354D; /* Azul oscuro elegante */
+    align-items: center;
+    justify-content: center;
 }
+
 
 .currency-label {
     margin-right: 8px; /* Espaciado entre el texto y el selector */
@@ -198,3 +241,47 @@
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Resplandor refinado */
 }
 
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block !important; /* Muestra el menú automáticamente */
+}
+
+
+
+/* Ocultar el texto de moneda en dispositivos pequeños */
+@media screen and (max-width: 768px) {
+    .currency-label {
+        display: none; /* Oculta el texto */
+    }
+
+    .currency-select {
+        width: 100px; /* Reduce el ancho */
+        font-size: 0.9rem; /* Reduce el tamaño del texto */
+        padding: 4px; /* Ajusta el espacio interno */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .carousel {
+        width: 85%; /* Más ancho en móviles */
+        height: auto; /* Mantiene proporciones sin aumentar la altura */
+    }
+
+    .carousel img {
+        height: 200px; /* Mantiene la altura reducida */
+        width: 100%; /* Se adapta al nuevo ancho */
+        object-fit: cover; /* Evita que la imagen se deforme */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .carousel-container {
+        margin-top: 15px; /* Reduce la separación */
+    }
+}
+
+@media screen and (min-width: 995px) {
+    .navbar {
+        height: 60px !important; /* Reduce la altura del navbar solo en escritorio */
+        padding: 5px 0 !important; /* Reduce el espacio interno */
+    }
+}

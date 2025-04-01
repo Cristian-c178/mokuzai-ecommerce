@@ -2,13 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './HeaderNavbar.css'; // Importar la hoja de estilos
 
+
+
+
 const Header = ({ cart, currency, handleCurrencyChange }) => {
     return (
         <header className="header">
             {/* Contenedor principal del header */}
             <div className="header-container">
                 {/* Nombre centrado */}
-                <h1 className="header-title">Mokuzai</h1>
+                
 
                 {/* Seleccionar moneda */}
                 <div className="currency-selector">
@@ -30,6 +33,8 @@ const Header = ({ cart, currency, handleCurrencyChange }) => {
                     <span className="cart-count">{cart.length}</span>
                 </Link>
             </div>
+
+            <Link to="/" className="mokuzai-button">Mokuzai</Link>
         </header>
     );
 };

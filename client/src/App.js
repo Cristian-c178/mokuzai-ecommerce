@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import './Testimonials.css';
 
+
 const App = () => {
     const [cart, setCart] = useState([]);
     const [isChatOpen, setIsChatOpen] = useState(false); // Controlar el chat flotante

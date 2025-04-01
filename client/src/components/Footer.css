@@ -90,3 +90,49 @@
     }
 }
 
+@media (max-width: 768px) {
+    .footer {
+        padding: 15px 0 !important; /* Reduce el espacio vertical */
+    }
+
+    .footer-container {
+        display: grid !important; /* Usa un layout de columnas */
+        grid-template-columns: 1fr 1fr; /* Divide en dos columnas */
+        gap: 10px !important; /* Espaciado reducido */
+        padding: 10px !important; /* Menos margen */
+    }
+
+    .payment-methods, .social-media {
+        display: flex !important; /* Usa Flexbox */
+        flex-direction: column !important; /* Acomoda los elementos en columna */
+        align-items: center !important; /* Centra los íconos y el texto */
+        justify-content: center !important;
+    }
+
+    .payment-icons, .social-icons {
+        display: flex;
+        justify-content: center !important; /* Centra los íconos horizontalmente */
+        align-items: center !important;
+        gap: 10px !important; /* Ajusta la separación entre íconos */
+    }
+    .footer-links li {
+        margin: 3px 0 !important; /* Reduce espacio entre enlaces */
+    }
+
+    .icon {
+        font-size: 1.5rem !important; /* Reduce tamaño de los íconos */
+    }
+
+    .footer-copyright {
+        grid-column: span 2; /* Que el copyright abarque ambas columnas */
+        margin-top: 5px !important; /* Reduce espacio inferior */
+        padding-bottom: 0px !important; /* Ajusta la separación con el borde */
+    }
+
+    .whatsapp-button .icon {
+        font-size: 2rem !important; /* Mantiene su tamaño original */
+    }
+    
+}
+
+

@@ -28,7 +28,7 @@ const Testimonials = () => {
                             {testimonial.name.charAt(0)} {/* Inicial del nombre */}
                         </div>
                         <p className="testimonial-text">"{testimonial.text}"</p>
-                        <h3 className="testimonial-name">- {testimonial.name}</h3>
+                        <h3 className="testimonial-name"> {testimonial.name}</h3>
                     </div>
                 ))}
             </div>
