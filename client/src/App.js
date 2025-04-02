@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { detectCurrency, fetchExchangeRate } from './utils/currencyUtils'; // Importar funciones de utilidad
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Home from './components/Home'; // Página de inicio con el carrusel
@@ -12,38 +11,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import './Testimonials.css';
 
-
 const App = () => {
     const [cart, setCart] = useState([]);
     const [isChatOpen, setIsChatOpen] = useState(false); // Controlar el chat flotante
     const [message, setMessage] = useState(''); // Capturar el mensaje del usuario
-    const [currency, setCurrency] = useState('USD'); // Moneda por defecto
-    const [exchangeRate, setExchangeRate] = useState(1); // Tasa de cambio por defecto
+    const [currency, setCurrency] = useState('PEN'); // Moneda por defecto
 
-    // Función para inicializar la detección de moneda y tasa de cambio
-    useEffect(() => {
-        const initializeCurrency = async () => {
-            const detectedCurrency = await detectCurrency(); // Detecta la moneda del usuario
-            setCurrency(detectedCurrency);
-
-            if (detectedCurrency !== 'USD') {
-                const rate = await fetchExchangeRate(detectedCurrency, 'USD');
-                setExchangeRate(rate);
-            }
-        };
-
-        initializeCurrency();
-    }, []);
-
-    // Cambiar moneda manualmente
-    const handleCurrencyChange = async (newCurrency) => {
+    // Función para cambiar moneda manualmente
+    const handleCurrencyChange = (newCurrency) => {
         setCurrency(newCurrency);
-        if (newCurrency !== 'USD') {
-            const rate = await fetchExchangeRate(newCurrency, 'USD');
-            setExchangeRate(rate);
-        } else {
-            setExchangeRate(1); // USD a USD no requiere conversión
-        }
     };
 
     const addToCart = (product) => {
@@ -71,11 +47,7 @@ const App = () => {
     return (
         <Router>
             <div className="App">
-                <Header
-                    cart={cart}
-                    currency={currency}
-                    handleCurrencyChange={handleCurrencyChange} // Pasa la función de cambio de moneda
-                />
+                <Header cart={cart} currency={currency} handleCurrencyChange={handleCurrencyChange} />
                 <Navbar />
 
                 <main>
@@ -91,45 +63,13 @@ const App = () => {
                         {/* Redirección desde /products */}
                         <Route path="/products" element={<Navigate to="/products/letreros-led" />} />
 
-                        <Route
-                            path="/cart"
-                            element={<Cart
-                                cart={cart}
-                                removeFromCart={removeFromCart}
-                                currency={currency}
-                                exchangeRate={exchangeRate} // Pasa la tasa de cambio
-                            />}
-                        />
+                        <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} currency={currency} />} />
                         <Route path="/contact" element={<h1>Página de Contacto</h1>} />
 
                         {/* Rutas específicas para categorías */}
-                        <Route
-                            path="/products/letreros-led"
-                            element={<CategoryProductList
-                                category="letreros-led"
-                                addToCart={addToCart}
-                                currency={currency}
-                                exchangeRate={exchangeRate} // Pasa la tasa de cambio
-                            />}
-                        />
-                        <Route
-                            path="/products/decorativos-mdf"
-                            element={<CategoryProductList
-                                category="decorativos-mdf"
-                                addToCart={addToCart}
-                                currency={currency}
-                                exchangeRate={exchangeRate}
-                            />}
-                        />
-                        <Route
-                            path="/products/detalles-sublimados"
-                            element={<CategoryProductList
-                                category="detalles-sublimados"
-                                addToCart={addToCart}
-                                currency={currency}
-                                exchangeRate={exchangeRate}
-                            />}
-                        />
+                        <Route path="/products/letreros-led" element={<CategoryProductList category="letreros-led" addToCart={addToCart} currency={currency} />} />
+                        <Route path="/products/decorativos-mdf" element={<CategoryProductList category="decorativos-mdf" addToCart={addToCart} currency={currency} />} />
+                        <Route path="/products/detalles-sublimados" element={<CategoryProductList category="detalles-sublimados" addToCart={addToCart} currency={currency} />} />
                     </Routes>
                 </main>
 

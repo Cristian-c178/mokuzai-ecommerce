@@ -1,5 +1,6 @@
 import React from 'react';
 import './Cart.css'; // Importa los estilos refinados
+import CheckoutForm from './CheckoutForm'; // Importa el formulario de compra
 
 const Cart = ({ cart, currency, exchangeRate, removeFromCart }) => {
     // Calcular el total del precio de los productos
@@ -10,8 +11,10 @@ const Cart = ({ cart, currency, exchangeRate, removeFromCart }) => {
             : `S/${total.toFixed(2)}`;
     };
 
-    // Redirigir a Mercado Pago
-    const handleCheckout = () => {
+    // Redirigir a Mercado Pago después de validar el formulario
+    const handleCheckout = (formData) => {
+        console.log('✅ Pedido confirmado con estos datos:', formData);
+        
         const mercadoPagoURL = "https://link.mercadopago.com.pe/mokuzai"; // Tu link de Mercado Pago
         window.open(mercadoPagoURL, "_blank");
     };
@@ -19,6 +22,7 @@ const Cart = ({ cart, currency, exchangeRate, removeFromCart }) => {
     return (
         <div className="cart-container">
             <h2 className="cart-title">Carrito de Compras</h2>
+
             {cart.length === 0 ? (
                 <p className="cart-empty">Tu carrito está vacío. ¡Agrega productos para continuar!</p>
             ) : (
@@ -48,12 +52,10 @@ const Cart = ({ cart, currency, exchangeRate, removeFromCart }) => {
                             </li>
                         ))}
                     </ul>
-                    <div className="cart-summary">
-                        <h3>Total: {calculateTotal()}</h3>
-                        <button className="cart-checkout-button" onClick={handleCheckout}>
-                            Finalizar Compra
-                        </button>
-                    </div>
+
+                    {/* 🔹 Sección de validación con CheckoutForm antes de procesar el pago */}
+                    <h3>Total: {calculateTotal()}</h3>
+                    <CheckoutForm onSubmit={handleCheckout} />
                 </div>
             )}
         </div>

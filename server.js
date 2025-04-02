@@ -24,9 +24,11 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Middleware
 app.use(cors({
-    origin: ["https://mokuzai.store", "https://www.mokuzai.store", "https://mokuzai-ecommerce.vercel.app"],
+    origin: ["http://localhost:3000", "http://localhost:3001", "https://mokuzai.store", "https://mokuzai-ecommerce.vercel.app"],
     methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
 }));
+
 app.use(express.json()); // Manejar JSON
 
 // Modelo de producto
@@ -48,9 +50,11 @@ app.get('/', (req, res) => {
 // Endpoint para obtener productos desde la base de datos con manejo de errores detallado
 app.get('/api/products', async (req, res) => {
     try {
-        const products = await Product.find();
+        const { category } = req.query; // Cambio para manejar categorías con query parameters
+        const products = category ? await Product.find({ category }) : await Product.find();
+
         if (products.length === 0) {
-            return res.status(404).json({ message: "No se encontraron productos en la base de datos" });
+            return res.status(404).json({ message: `No se encontraron productos${category ? ` en la categoría '${category}'` : ''}` });
         }
         res.status(200).json(products);
     } catch (error) {
@@ -59,28 +63,11 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
-// Endpoint para obtener productos por categoría con mejor manejo de errores
-app.get('/api/products/:category', async (req, res) => {
-    try {
-        const { category } = req.params;
-        const products = await Product.find({ category });
-
-        if (products.length === 0) {
-            return res.status(404).json({ message: `No se encontraron productos en la categoría '${category}'` });
-        }
-
-        res.status(200).json(products);
-    } catch (error) {
-        console.error(`❌ Error en /api/products/${req.params.category}:`, error.message);
-        res.status(500).json({ message: "Error interno en el servidor", error: error.message });
-    }
-});
-
 // Endpoint para agregar un producto con validación
 app.post('/api/products', async (req, res) => {
     try {
         const { name, price, description, image, category } = req.body;
-        
+
         if (!name || !price || !description || !category) {
             return res.status(400).json({ message: "Todos los campos son obligatorios" });
         }

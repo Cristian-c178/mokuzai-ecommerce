@@ -2,18 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './HeaderNavbar.css'; // Importar la hoja de estilos
 
-
-
-
 const Header = ({ cart, currency, handleCurrencyChange }) => {
     return (
         <header className="header">
             {/* Contenedor principal del header */}
             <div className="header-container">
-                {/* Nombre centrado */}
-                
-
-                {/* Seleccionar moneda */}
+                {/* Seleccionar moneda manualmente */}
                 <div className="currency-selector">
                     <label htmlFor="currency" className="currency-label">Moneda:</label>
                     <select
