@@ -23,11 +23,11 @@ mongoose.connect(process.env.MONGO_URI, {
 });
 
 // Middleware
+const cors = require('cors');
 app.use(cors({
-    origin: ["http://localhost:3000", "http://localhost:3001", "https://mokuzai.store", "https://mokuzai-ecommerce.vercel.app"],
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"],
+    origin: "https://mokuzai.store" // 🔹 Reemplázalo con tu dominio oficial
 }));
+
 
 app.use(express.json()); // Manejar JSON
 
